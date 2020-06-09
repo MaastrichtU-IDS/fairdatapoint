@@ -2,15 +2,18 @@ version: '3'
 services:
   fdp:
     image: "nlesc/fairdatapoint"
-    command: fdp-run HOSTNAME 8080 --db http://db:8890/sparql
-    ports:
-      - "8080:8080"
+    command: fdp-run 0.0.0.0 8080 --db http://db:8890/sparql
+    environment: 
+      - VIRTUAL_HOST=fdp.137.120.31.101.nip.io
+      - LETSENCRYPT_HOST=fdp.137.120.31.101.nip.io
+    # ports:
+    #   - "8080:8080"
     depends_on:
       - db
   db:
     image: "tenforce/virtuoso"
-    ports:
-        - "8890:8890"
-        - "1111:1111"
+    # ports:
+    #     - "8890:8890"
+    #     - "1111:1111"
     environment:
         SPARQL_UPDATE: "true"
