@@ -6,11 +6,11 @@ services:
     environment: 
       - VIRTUAL_HOST=fdp.137.120.31.101.nip.io
       - VIRTUAL_PORT=8080
-      # - LETSENCRYPT_HOST=fdp.137.120.31.101.nip.io
+      - LETSENCRYPT_HOST=fdp.137.120.31.101.nip.io
     expose:
       - "8080"
-    ports:
-      - "8080:8080"
+    # ports:
+    #   - "8080:8080"
     # healthcheck:
     #     test: curl --silent --fail http://0.0.0.0:8080 || exit 1
     #     interval: 5s
