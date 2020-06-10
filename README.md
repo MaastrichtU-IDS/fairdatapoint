@@ -1,3 +1,18 @@
+### Post data
+
+```bash
+cd tests/data
+curl -X POST -H "Content-Type: text/turtle" -d @catalog01.ttl https://fdp.137.120.31.101.nip.io/catalog/
+```
+
+Get created catalog:
+
+```bash
+curl -iH 'Accept: text/turtle' https://fdp.137.120.31.101.nip.io/catalog/catalog01
+```
+
+
+
 # FAIR Data Point (FDP)
 
 [![PyPI](https://img.shields.io/pypi/v/fairdatapoint)](https://pypi.org/project/fairdatapoint/)
