@@ -6,6 +6,7 @@ services:
     environment: 
       - VIRTUAL_HOST=fdp.semanticscience.org,fairdatapoint.semanticscience.org
       - VIRTUAL_PORT=8080
+      - HTTPS_METHOD=noredirect
       # - LETSENCRYPT_HOST=fdp.semanticscience.org,fairdatapoint.semanticscience.org
     expose:
       - "8080"
