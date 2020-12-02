@@ -23,7 +23,7 @@ test:
 	pytest
 
 serve-dev:
-	fdp-run localhost 8080
+	fdp-run localhost 80
 
 clean: clean-build clean-pyc clean-test
 
@@ -50,5 +50,8 @@ dist: clean
 	python setup.py sdist bdist_wheel
 	ls -l dist
 
-release: clean
+install-dist:
+	pip install `ls dist/*.gz`"[tests]"
+
+release:
 	python -m twine upload dist/*

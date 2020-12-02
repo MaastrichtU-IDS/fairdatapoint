@@ -16,6 +16,7 @@ curl -iH 'Accept: text/turtle' https://fdp.137.120.31.101.nip.io/catalog/catalog
 # FAIR Data Point (FDP)
 
 [![PyPI](https://img.shields.io/pypi/v/fairdatapoint)](https://pypi.org/project/fairdatapoint/)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/nlesc/fairdatapoint?label=Docker)](https://hub.docker.com/r/nlesc/fairdatapoint)
 [![DOI](https://zenodo.org/badge/37470907.svg)](https://zenodo.org/badge/latestdoi/37470907)
 [![Research Software Directory](https://img.shields.io/badge/RSD-FAIRDataPoint-red)](https://research-software.nl/software/fairdatapoint)
 [![Build Status](https://travis-ci.org/NLeSC/fairdatapoint.svg?branch=master)](https://travis-ci.org/NLeSC/fairdatapoint)
@@ -53,10 +54,10 @@ pip install .
 
 ## Running
 ```bash
-fdp-run localhost 8080
+fdp-run localhost 80
 ```
 
-Then visit from your browser: http://localhost:8080/
+The [Swagger UI](https://swagger.io/tools/swagger-ui/) is enabled for FDP service, and you can have a try by visiting http://localhost/ui.
 
 ## Unit testing
 Run tests (including coverage) with:
@@ -71,35 +72,33 @@ TODO: Include a link to your project's full documentation here.
 
 ## Deploy with Docker
 
-Download the `docker-compose.prod.yml` from this repo, change the `HOSTNAME` in the file to a proper host, and then run the command
-```
-docker-compose -f docker-compose.prod.yml up -d
-```
+Check [fairdatapoint-service](https://github.com/CunliangGeng/fairdatapoint-service).
 
 ## Deploy without Docker
 
-Before deploying FDP, it's necessary to first have a running SPARQL database.
+Before deploying FDP, it's necessary to first have a running SPARQL database which can be used to store metadata.
 
 ```
 pip install fairdatapoint
 
 # fdp-run <host> <port> --db=<sparql-endpoint>
-fdp example.com 8080 --db='http://dbpedia.org/sparql'
+# Let's assume your <host> is 'example.com' and <sparql-endpoint> is 'http://example.com/sparql', then
+fdp-run example.com 80 --db='http://example.com/sparql'
 ```
 
 ## Web API documentation
 
 FAIR Data Point (FDP) exposes the following endpoints (URL paths):
 
-| Endpoint |  GET  | POST |      DELETE     |
-|--------------|:--------------:|:-----------------:|:--------------:|
-| fdp | Output metadata triples | Remove existing triples for a specific ID, then create new triples with the request data | Not Allowed |
-| catalog/     | Output all IDs   | Remove existing triples for a specific ID, then create new triples with the request data | Remove all IDs |
-| dataset/     | Output all IDs   | Remove existing triples for a specific ID, then create new triples with the request data | Remove all IDs |
-| distribution/  | Output all IDs  | Remove existing triples for a specific ID, then create new triples with the request data | Remove all IDs |
-| catalog/\<catalogID\> | Output metadata triples | Not Allowed | Remove the specific ID |
-| dataset/\<datasetID\> | Output metadata triples | Not Allowed | Remove the specific ID |
-| distribution/\<distributionID\> | Output metadata triples | Not Allowed | Remove the specific ID |
+| Endpoint |  GET  | POST |  PUT | DELETE     |
+|--------------|:--------------:|:-----------------:|:--------------:|:--------------:
+| fdp | Output fdp metadata | Create new fdp metadata | Update fdp metadata | Not Allowed |
+| catalog     | Output all catalog IDs   | Create new catalog metadata| Not Allowed | Not Allowed |
+| dataset     | Output all dataset IDs   | Create new dataset metadata| Not Allowed | Not Allowed |
+| distribution  | Output all distribution IDs  | Create new distribution metadata| Not Allowed | Not Allowed |
+| catalog/\<catalogID\> | Output \<catalogID\> metadata | Not Allowed | Update \<catalogID\> metadata | Remove \<catalogID\> metadata |
+| dataset/\<datasetID\> | Output \<datasetID\> metadata | Not Allowed | Update \<datasetID\> metadata | Remove \<datasetID\> metadata |
+| distribution/\<distributionID\> | Output \<distributionID\> metadata | Not Allowed | Update \<distributionID\> metadata | Remove \<distributionID\> metadata |
 
 
 ### Access endpoints to request metadata programmatically

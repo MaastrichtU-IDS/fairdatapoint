@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -26,9 +26,7 @@ setup(
     author="Rajaram Kaliyaperumal, Arnold Kuzniar, Cunliang Geng, Carlos Martinez-Ortiz",
     author_email='c.martinez@esciencecenter.nl',
     url='https://github.com/NLeSC/fairdatapoint',
-    packages=[
-        'fdp',
-    ],
+    packages=find_packages(),
     include_package_data=True,
     license="Apache Software License 2.0",
     zip_safe=False,
@@ -46,8 +44,8 @@ setup(
     test_suite='tests',
     install_requires=install_requires,
     extras_require={
-        'dev': ['prospector[with_pyroma]', 'yapf', 'isort'],
-        'tests': ['requests', 'pytest', 'pytest-cov', 'coveralls', 'pytest-datadir-ng'],
+        'dev': ['prospector[with_pyroma]', 'yapf', 'isort', 'swagger-ui-bundle>=0.0.2'],
+        'tests': ['pytest>5.0', 'pytest-cov', 'coveralls', 'pytest-datadir-ng'],
         'docs': ['sphinx', 'sphinx_rtd_theme', 'recommonmark'],
     },
     scripts=[

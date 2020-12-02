@@ -7,7 +7,7 @@
 
 <http://0.0.0.0/catalog/catalog01> a dcat:Catalog ;
     dcterms:title "First sample catalog";
-    dcterms:hasVersion "1.0" ;
+    dcterms:hasVersion "2.0" ;
     dcterms:publisher <http://orcid.org/0000-0002-4368-8058> ;
     dcterms:isPartOf <http://0.0.0.0/fdp> ;
     fdp:metadataIdentifier <http://example.org/catalog01> ;
